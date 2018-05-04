@@ -14,7 +14,10 @@ class SqlResult:
             return first[0]
 
     def map_field(self):
-        return (row[0] for row in self.cursor)
+        return (row[0] for row in self)
+
+    def map(self, func: callable):
+        return (row.map(func) for row in self)
 
     def __iter__(self):
         # the cursor itself is iterable
