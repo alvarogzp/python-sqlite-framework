@@ -2,7 +2,7 @@ import time
 
 from sqlite_framework.log.impl import BasicSqliteLogger
 from sqlite_framework.session.session import SqliteSession
-from test.factory import TestSqliteStorageComponentFactory
+from sqlite_framework_test.factory import TestSqliteStorageComponentFactory
 
 
 session = SqliteSession(":memory:", debug=True)

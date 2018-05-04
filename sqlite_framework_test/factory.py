@@ -2,7 +2,7 @@ from sqlite3 import Connection
 
 from sqlite_framework.component.factory import SqliteStorageComponentFactory
 from sqlite_framework.log.logger import SqliteLogger
-from test.components.test import TestSqliteComponent
+from sqlite_framework_test.components.test import TestSqliteComponent
 
 
 class TestSqliteStorageComponentFactory(SqliteStorageComponentFactory):
