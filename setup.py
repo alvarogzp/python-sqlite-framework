@@ -8,6 +8,7 @@ setup(
     use_scm_version=True,
 
     description=project_info.description,
+    long_description=project_info.description,
 
     url=project_info.url,
 
@@ -27,4 +28,25 @@ setup(
     ],
 
     python_requires='>=3',
+
+    # for pypi:
+
+    keywords='sqlite framework sqlite3 sql database',
+
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
+        'Topic :: Database',
+        'Programming Language :: SQL',
+
+        'License :: OSI Approved :: Apache Software License',
+
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7'
+    ],
 )
