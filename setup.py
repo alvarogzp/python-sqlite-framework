@@ -20,7 +20,8 @@ setup(
     packages=find_packages(exclude=["sqlite_framework_test*"]),
 
     setup_requires=[
-        'setuptools_scm'
+        'setuptools_scm',
+        'wheel'
     ],
 
     install_requires=[
