@@ -1,6 +1,40 @@
 from sqlite3 import OperationalError
 
 from sqlite_framework.component.component import SqliteStorageComponent
+from sqlite_framework.sql.item.column import Column
+from sqlite_framework.sql.item.constants.conflict_resolution import REPLACE
+from sqlite_framework.sql.item.constants.operator import EQUAL
+from sqlite_framework.sql.item.constants.type import TEXT, INTEGER
+from sqlite_framework.sql.item.expression.compound.condition import Condition
+from sqlite_framework.sql.item.table import Table
+from sqlite_framework.sql.statement.builder.insert import Insert
+from sqlite_framework.sql.statement.builder.select import Select
+
+
+NAME = "version_info"
+VERSION = 1
+
+
+COMPONENT = Column("component", TEXT, "primary key", "not null")
+COMPONENT_VERSION = Column("version", INTEGER)
+
+
+VERSION_INFO = Table("version_info")
+VERSION_INFO.column(COMPONENT)
+VERSION_INFO.column(COMPONENT_VERSION)
+
+
+SET_VERSION = Insert().or_(REPLACE)\
+    .table(VERSION_INFO)\
+    .columns(COMPONENT, COMPONENT_VERSION)\
+    .values(":component", ":version")\
+    .build()
+
+GET_VERSION = Select()\
+    .fields(COMPONENT_VERSION)\
+    .table(VERSION_INFO)\
+    .where(Condition(COMPONENT, EQUAL, ":component"))\
+    .build()
 
 
 class VersionInfoSqliteComponent(SqliteStorageComponent):
@@ -10,30 +44,21 @@ class VersionInfoSqliteComponent(SqliteStorageComponent):
     To avoid errors, they should be as direct as possible.
     """
 
-    version = 1
-
     def __init__(self):
-        super().__init__("version_info", self.version)
+        super().__init__(NAME, VERSION)
+        self.managed_tables(VERSION_INFO)
         self.migrated = False
 
     def create(self):
-        self._sql("create table version_info ("
-                  "component text primary key not null,"
-                  "version integer"
-                  ")")
+        super().create()
         self.migrated = True
 
     def set_version(self, component: str, version: int):
-        self._sql("insert or replace into version_info "
-                  "(component, version) "
-                  "values (?, ?)",
-                  (component, version))
+        self.statement(SET_VERSION).execute(component=component, version=version)
 
     def get_version(self, component: str):
         try:
-            row = self._sql("select version from version_info "
-                            "where component = ?",
-                            (component,)).fetchone()
+            row = self.statement(GET_VERSION).execute(component=component).first()
         except OperationalError as e:
             if component == self.name and not self.migrated:
                 # if the version of this module is being checked and it has not yet being migrated
