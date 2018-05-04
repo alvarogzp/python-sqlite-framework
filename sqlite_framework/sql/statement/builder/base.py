@@ -1,6 +1,6 @@
 import copy
 
-from clock.storage.data_source.data_sources.sqlite.sql.statement.statement import CompoundSqlStatement, \
+from sqlite_framework.sql.statement.statement import CompoundSqlStatement, \
     SingleSqlStatement
 
 

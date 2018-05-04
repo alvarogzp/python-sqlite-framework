@@ -1,9 +1,9 @@
 from typing import Union, Iterable
 
-from clock.storage.data_source.data_sources.sqlite.sql.item.column import Column
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.base import Expression
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.compound.list.parsed import ParsedExpressionList
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.simple import ColumnName, Literal
+from sqlite_framework.sql.item.column import Column
+from sqlite_framework.sql.item.expression.base import Expression
+from sqlite_framework.sql.item.expression.compound.list.parsed import ParsedExpressionList
+from sqlite_framework.sql.item.expression.simple import ColumnName, Literal
 
 
 EXPRESSION_TYPE_SIMPLE = Union[Expression, Column, str, int]

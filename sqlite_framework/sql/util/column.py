@@ -1,6 +1,6 @@
 from typing import Union
 
-from clock.storage.data_source.data_sources.sqlite.sql.item.column import Column
+from sqlite_framework.sql.item.column import Column
 
 
 class ColumnUtil:

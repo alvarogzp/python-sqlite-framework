@@ -1,6 +1,6 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.constants.operator import Operator
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.compound.list.generic import ExpressionList
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.parser import EXPRESSION_TYPE
+from sqlite_framework.sql.item.constants.operator import Operator
+from sqlite_framework.sql.item.expression.compound.list.generic import ExpressionList
+from sqlite_framework.sql.item.expression.parser import EXPRESSION_TYPE
 
 
 class BaseCondition(ExpressionList):

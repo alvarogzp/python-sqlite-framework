@@ -1,4 +1,4 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.base import NamedItem
+from sqlite_framework.sql.item.base import NamedItem
 
 
 class Type(NamedItem):

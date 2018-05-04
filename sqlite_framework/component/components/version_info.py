@@ -1,6 +1,6 @@
 from sqlite3 import OperationalError
 
-from clock.storage.data_source.data_sources.sqlite.component.component import SqliteStorageComponent
+from sqlite_framework.component.component import SqliteStorageComponent
 
 
 class VersionInfoSqliteComponent(SqliteStorageComponent):

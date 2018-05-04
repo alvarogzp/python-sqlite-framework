@@ -1,6 +1,6 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.base import StringItem
-from clock.storage.data_source.data_sources.sqlite.sql.item.column import Column
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.base import Expression
+from sqlite_framework.sql.item.base import StringItem
+from sqlite_framework.sql.item.column import Column
+from sqlite_framework.sql.item.expression.base import Expression
 
 
 class Literal(StringItem, Expression):

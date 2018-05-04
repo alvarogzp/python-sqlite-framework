@@ -1,6 +1,6 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.constants.type import Type
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.compound.base import CompoundExpression
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.parser import EXPRESSION_TYPE
+from sqlite_framework.sql.item.constants.type import Type
+from sqlite_framework.sql.item.expression.compound.base import CompoundExpression
+from sqlite_framework.sql.item.expression.parser import EXPRESSION_TYPE
 
 
 class Cast(CompoundExpression):

@@ -1,6 +1,6 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.constants.order_mode import OrderMode
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.parser import EXPRESSION_TYPE, ExpressionParser
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.clauses.base import BaseClause
+from sqlite_framework.sql.item.constants.order_mode import OrderMode
+from sqlite_framework.sql.item.expression.parser import EXPRESSION_TYPE, ExpressionParser
+from sqlite_framework.sql.statement.builder.clauses.base import BaseClause
 
 
 class OrderByClause(BaseClause):

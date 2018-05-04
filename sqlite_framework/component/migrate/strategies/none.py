@@ -1,4 +1,4 @@
-from clock.storage.data_source.data_sources.sqlite.component.migrate.strategy import SqliteMigrationStrategy
+from sqlite_framework.component.migrate.strategy import SqliteMigrationStrategy
 
 
 class SqliteNoMigration(SqliteMigrationStrategy):

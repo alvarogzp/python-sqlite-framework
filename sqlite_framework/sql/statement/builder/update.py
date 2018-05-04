@@ -1,8 +1,8 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.column import Column
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.parser import EXPRESSION_TYPE, ExpressionParser
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.base import StatementBuilder
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.clauses.table import TableClause
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.clauses.where import WhereClause
+from sqlite_framework.sql.item.column import Column
+from sqlite_framework.sql.item.expression.parser import EXPRESSION_TYPE, ExpressionParser
+from sqlite_framework.sql.statement.builder.base import StatementBuilder
+from sqlite_framework.sql.statement.builder.clauses.table import TableClause
+from sqlite_framework.sql.statement.builder.clauses.where import WhereClause
 
 
 class Update(TableClause, WhereClause, StatementBuilder):

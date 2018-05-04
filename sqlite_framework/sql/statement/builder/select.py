@@ -1,8 +1,8 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.parser import EXPRESSION_TYPE, ExpressionParser
-from clock.storage.data_source.data_sources.sqlite.sql.item.table import Table
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.base import StatementBuilder
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.clauses.order_by import OrderByClause
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.clauses.where import WhereClause
+from sqlite_framework.sql.item.expression.parser import EXPRESSION_TYPE, ExpressionParser
+from sqlite_framework.sql.item.table import Table
+from sqlite_framework.sql.statement.builder.base import StatementBuilder
+from sqlite_framework.sql.statement.builder.clauses.order_by import OrderByClause
+from sqlite_framework.sql.statement.builder.clauses.where import WhereClause
 
 
 class Select(WhereClause, OrderByClause, StatementBuilder):

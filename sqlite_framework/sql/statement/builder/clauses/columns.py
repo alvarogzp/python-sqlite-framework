@@ -1,5 +1,5 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.column import Column
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.clauses.base import BaseClause
+from sqlite_framework.sql.item.column import Column
+from sqlite_framework.sql.statement.builder.clauses.base import BaseClause
 
 
 class ColumnsClause(BaseClause):

@@ -1,8 +1,8 @@
 from inspect import signature
 
 from clock.log.api import LogApi
-from clock.storage.data_source.data_sources.sqlite.component.component import SqliteStorageComponent
-from clock.storage.data_source.data_sources.sqlite.component.components.version_info import VersionInfoSqliteComponent
+from sqlite_framework.component.component import SqliteStorageComponent
+from sqlite_framework.component.components.version_info import VersionInfoSqliteComponent
 
 
 class SqliteMigrationStrategy:

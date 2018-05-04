@@ -1,7 +1,7 @@
 from collections import defaultdict
 
-from clock.storage.data_source.data_sources.sqlite.sql.item.base import NamedItem
-from clock.storage.data_source.data_sources.sqlite.sql.item.column import Column
+from sqlite_framework.sql.item.base import NamedItem
+from sqlite_framework.sql.item.column import Column
 
 
 class Table(NamedItem):

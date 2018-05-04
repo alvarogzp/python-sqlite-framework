@@ -1,10 +1,10 @@
 from clock.log.api import LogApi
-from clock.storage.data_source.data_sources.sqlite.component.component import SqliteStorageComponent
-from clock.storage.data_source.data_sources.sqlite.component.components.version_info import VersionInfoSqliteComponent
-from clock.storage.data_source.data_sources.sqlite.component.migrate.exception import SqliteComponentMigratorException
-from clock.storage.data_source.data_sources.sqlite.component.migrate.strategies.create import SqliteCreateMigration
-from clock.storage.data_source.data_sources.sqlite.component.migrate.strategies.none import SqliteNoMigration
-from clock.storage.data_source.data_sources.sqlite.component.migrate.strategies.upgrade_or_downgrade import \
+from sqlite_framework.component.component import SqliteStorageComponent
+from sqlite_framework.component.components.version_info import VersionInfoSqliteComponent
+from sqlite_framework.component.migrate.exception import SqliteComponentMigratorException
+from sqlite_framework.component.migrate.strategies.create import SqliteCreateMigration
+from sqlite_framework.component.migrate.strategies.none import SqliteNoMigration
+from sqlite_framework.component.migrate.strategies.upgrade_or_downgrade import \
     SqliteUpgradeOrDowngradeMigration
 
 

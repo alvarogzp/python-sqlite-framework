@@ -1,4 +1,4 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.base import Expression
+from sqlite_framework.sql.item.expression.base import Expression
 
 
 DEFAULT_SEPARATOR = ", "

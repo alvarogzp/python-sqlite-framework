@@ -1,6 +1,6 @@
 import sqlite3
 
-from clock.storage.data_source.data_sources.sqlite.sql.util.column import ColumnUtil
+from sqlite_framework.sql.util.column import ColumnUtil
 
 
 class ResultRow(sqlite3.Row):

@@ -1,5 +1,5 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.base import SqlItem
-from clock.storage.data_source.data_sources.sqlite.sql.item.constants.type import Type, INTEGER
+from sqlite_framework.sql.item.base import SqlItem
+from sqlite_framework.sql.item.constants.type import Type, INTEGER
 
 
 class Column(SqlItem):

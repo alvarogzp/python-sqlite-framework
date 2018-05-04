@@ -1,5 +1,5 @@
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.base import Expression
-from clock.storage.data_source.data_sources.sqlite.sql.item.expression.parser import ExpressionParser
+from sqlite_framework.sql.item.expression.base import Expression
+from sqlite_framework.sql.item.expression.parser import ExpressionParser
 
 
 class CompoundExpression(Expression):

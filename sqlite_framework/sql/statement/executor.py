@@ -1,7 +1,7 @@
 from sqlite3 import Connection
 
-from clock.storage.data_source.data_sources.sqlite.sql.result.result import SqlResult
-from clock.storage.data_source.data_sources.sqlite.sql.statement.statement import SqlStatement, SingleSqlStatement, \
+from sqlite_framework.sql.result.result import SqlResult
+from sqlite_framework.sql.statement.statement import SqlStatement, SingleSqlStatement, \
     CompoundSqlStatement
 
 

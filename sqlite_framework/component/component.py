@@ -1,10 +1,10 @@
 from sqlite3 import Connection
 
-from clock.storage.data_source.data_sources.sqlite.sql.item.table import Table
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.alter_table import AlterTable
-from clock.storage.data_source.data_sources.sqlite.sql.statement.builder.create_table import CreateTable
-from clock.storage.data_source.data_sources.sqlite.sql.statement.executor import StatementExecutor
-from clock.storage.data_source.data_sources.sqlite.sql.statement.statement import SingleSqlStatement, SqlStatement
+from sqlite_framework.sql.item.table import Table
+from sqlite_framework.sql.statement.builder.alter_table import AlterTable
+from sqlite_framework.sql.statement.builder.create_table import CreateTable
+from sqlite_framework.sql.statement.executor import StatementExecutor
+from sqlite_framework.sql.statement.statement import SingleSqlStatement, SqlStatement
 
 
 class SqliteStorageComponent:
