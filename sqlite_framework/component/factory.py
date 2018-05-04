@@ -1,13 +1,13 @@
 from sqlite3 import Connection
 
-from clock.log.api import LogApi
 from sqlite_framework.component.component import SqliteStorageComponent
 from sqlite_framework.component.components.version_info import VersionInfoSqliteComponent
 from sqlite_framework.component.migrate.migrator import SqliteComponentMigrator
+from sqlite_framework.log.logger import SqliteLogger
 
 
 class SqliteStorageComponentFactory:
-    def __init__(self, connection: Connection, logger: LogApi):
+    def __init__(self, connection: Connection, logger: SqliteLogger):
         self.connection = connection
         self.logger = logger
         self.version_info = self._version_info()  # type: VersionInfoSqliteComponent

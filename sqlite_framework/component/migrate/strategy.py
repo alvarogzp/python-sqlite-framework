@@ -1,13 +1,13 @@
 from inspect import signature
 
-from clock.log.api import LogApi
 from sqlite_framework.component.component import SqliteStorageComponent
 from sqlite_framework.component.components.version_info import VersionInfoSqliteComponent
+from sqlite_framework.log.logger import SqliteLogger
 
 
 class SqliteMigrationStrategy:
-    def __init__(self, component: SqliteStorageComponent, version_info: VersionInfoSqliteComponent, logger: LogApi,
-                 migration_type: str, old_version: int, new_version: int):
+    def __init__(self, component: SqliteStorageComponent, version_info: VersionInfoSqliteComponent,
+                 logger: SqliteLogger, migration_type: str, old_version: int, new_version: int):
         self.component = component
         self.version_info = version_info
         self.logger = logger
@@ -24,7 +24,7 @@ class SqliteMigrationStrategy:
         self.version_info.set_version(self.component.name, to_version)
 
     def _log_migration(self, migrating_to_version: int):
-        self.logger.log_sqlite_component_migration(
+        self.logger.migration(
             self.component.name, self.migration_type, self.old_version, self.new_version, migrating_to_version
         )
 

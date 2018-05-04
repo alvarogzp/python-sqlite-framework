@@ -1,4 +1,3 @@
-from clock.log.api import LogApi
 from sqlite_framework.component.component import SqliteStorageComponent
 from sqlite_framework.component.components.version_info import VersionInfoSqliteComponent
 from sqlite_framework.component.migrate.exception import SqliteComponentMigratorException
@@ -6,7 +5,7 @@ from sqlite_framework.component.migrate.strategies.create import SqliteCreateMig
 from sqlite_framework.component.migrate.strategies.none import SqliteNoMigration
 from sqlite_framework.component.migrate.strategies.upgrade_or_downgrade import \
     SqliteUpgradeOrDowngradeMigration
-
+from sqlite_framework.log.logger import SqliteLogger
 
 MIGRATION_TYPE_CREATE = "create"
 MIGRATION_TYPE_UPGRADE = "upgrade"
@@ -16,7 +15,8 @@ MIGRATION_TYPE_UNKNOWN = "unknown"
 
 
 class SqliteComponentMigrator:
-    def __init__(self, component: SqliteStorageComponent, version_info: VersionInfoSqliteComponent, logger: LogApi):
+    def __init__(self, component: SqliteStorageComponent, version_info: VersionInfoSqliteComponent,
+                 logger: SqliteLogger):
         self.component = component
         self.version_info = version_info
         self.logger = logger
