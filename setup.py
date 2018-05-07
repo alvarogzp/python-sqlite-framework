@@ -25,7 +25,6 @@ setup(
     ],
 
     install_requires=[
-        'sqlite3',
     ],
 
     python_requires='>=3',
