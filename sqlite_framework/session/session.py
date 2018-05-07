@@ -27,6 +27,9 @@ class SqliteSession:
         if self.inside_pending_context_manager:
             self.__enter__()
 
+    def context_manager(self):
+        return self
+
     def __enter__(self):
         if self.connection is not None:
             self.connection.execute("begin")
