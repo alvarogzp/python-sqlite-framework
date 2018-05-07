@@ -9,7 +9,7 @@ session = SqliteSession(":memory:", debug=True)
 
 with session:
     session.init()
-    component_factory = TestSqliteStorageComponentFactory(session.connection, BasicSqliteLogger())
+    component_factory = TestSqliteStorageComponentFactory(session, BasicSqliteLogger())
     test_component = component_factory.test()
 
 with session:
