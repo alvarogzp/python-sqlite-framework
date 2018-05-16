@@ -1,3 +1,4 @@
+from sqlite_framework.sql.item.column import Column
 from sqlite_framework.sql.item.expression.parser import EXPRESSION_TYPE, ExpressionParser
 from sqlite_framework.sql.item.table import Table
 from sqlite_framework.sql.statement.builder.base import StatementBuilder
@@ -19,6 +20,7 @@ class Select(WhereClause, OrderByClause, StatementBuilder):
         super().__init__()
         self._fields = "*"
         self._from = None
+        self._join = None
         self._group_by = None
         self._limit = None
         self._other = None
@@ -29,6 +31,19 @@ class Select(WhereClause, OrderByClause, StatementBuilder):
 
     def table(self, table: Table):
         self._from = "from {table}".format(table=table.str())  # unsafe formatting
+        return self
+
+    def join(self, table: Table, on: EXPRESSION_TYPE = None, using: Column = None):
+        join = "join {table}".format(table=table.str())  # unsafe formatting
+        assert on is None or using is None, "both 'on' and 'using' cannot be specified at the same time"
+        if on is not None:
+            join += " on {on}".format(on=ExpressionParser.parse(on).str())
+        if using is not None:
+            join += " using ({using})".format(using=using.name)
+        if self._not_none(self._join):
+            self._join = self._join + " " + join
+        else:
+            self._join = join
         return self
 
     def group_by(self, *expr: EXPRESSION_TYPE):
@@ -50,6 +65,7 @@ class Select(WhereClause, OrderByClause, StatementBuilder):
         clauses = [
             select,
             self._from,
+            self._join,
             self._where,
             self._group_by,
             self._order_by,
