@@ -1,4 +1,9 @@
 class SqlItem:
+    def __init__(self):
+        # the only purpose of this constructor is to hint IDE to always call super on subclasses
+        # to properly support multiple inheritance
+        super().__init__()
+
     def str(self):
         raise NotImplementedError()
 
