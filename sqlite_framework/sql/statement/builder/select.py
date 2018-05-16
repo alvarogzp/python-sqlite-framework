@@ -43,11 +43,11 @@ class Select(WhereClause, OrderByClause, StatementBuilder):
         elif not full_cartesian:
             raise Exception(
                 "Trying to create a join without adding 'on' nor 'using' clauses. "
-                "That results in a full cartesian product of both tables, "
+                "This results in a full cartesian product of both tables, "
                 "and that is probably not what you want to achieve. "
-                "Please, set either an 'on' condition or a 'using' column. "
+                "To avoid it, set either an 'on' condition or a 'using' column. "
                 "If you really want to perform the full cartesian product, "
-                "add a 'full_cartesian=True' parameter to the join call."
+                "set the 'full_cartesian' parameter to true."
             )
         if self._not_none(self._join):
             self._join += " " + join
