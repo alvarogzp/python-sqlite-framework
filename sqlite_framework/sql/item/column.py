@@ -4,6 +4,7 @@ from sqlite_framework.sql.item.constants.type import Type, INTEGER
 
 class Column(SqlItem):
     def __init__(self, name: str, type: Type, *constraints: str):
+        super().__init__()
         self.name = name
         self.type = type
         self.constraints = constraints

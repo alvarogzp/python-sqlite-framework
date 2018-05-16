@@ -10,6 +10,7 @@ class SqlItem:
 
 class StringItem(SqlItem):
     def __init__(self, string: str):
+        super().__init__()
         self.string = string
 
     def str(self):
