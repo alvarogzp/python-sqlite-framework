@@ -68,4 +68,4 @@ class VersionInfoSqliteComponent(SqliteStorageComponent):
                 # if the error is for another reason, let it propagate
                 raise e
         if row is not None:
-            return row["version"]
+            return row[COMPONENT_VERSION]
