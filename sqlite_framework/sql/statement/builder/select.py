@@ -33,13 +33,22 @@ class Select(WhereClause, OrderByClause, StatementBuilder):
         self._from = "from {table}".format(table=table.str())  # unsafe formatting
         return self
 
-    def join(self, table: Table, on: EXPRESSION_TYPE = None, using: Column = None):
+    def join(self, table: Table, on: EXPRESSION_TYPE = None, using: Column = None, cartesian: bool = False):
         join = "join {table}".format(table=table.str())  # unsafe formatting
         assert on is None or using is None, "both 'on' and 'using' cannot be specified at the same time"
         if on is not None:
             join += " on {on}".format(on=ExpressionParser.parse(on).str())
-        if using is not None:
+        elif using is not None:
             join += " using ({using})".format(using=using.name)
+        elif not cartesian:
+            raise Exception(
+                "Trying to create a join without adding 'on' nor 'using' clauses. "
+                "That results in a full cartesian product of both tables, "
+                "and that is probably not what you want to achieve. "
+                "Please, set either an 'on' condition or a 'using' column. "
+                "If you really want to perform the full cartesian product, "
+                "add a 'cartesian=True' parameter to the join call."
+            )
         if self._not_none(self._join):
             self._join = self._join + " " + join
         else:
