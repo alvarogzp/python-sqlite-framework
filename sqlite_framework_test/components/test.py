@@ -4,6 +4,11 @@ from sqlite_framework.sql.item.constants.conflict_resolution import REPLACE
 from sqlite_framework.sql.item.constants.operator import EQUAL, AND
 from sqlite_framework.sql.item.constants.order_mode import DESC, ASC
 from sqlite_framework.sql.item.constants.type import INTEGER, TEXT
+from sqlite_framework.sql.item.constraint.column.default import Default
+from sqlite_framework.sql.item.constraint.column.simple import PRIMARY_KEY, NOT_NULL
+from sqlite_framework.sql.item.constraint.foreign_key.change import CASCADE
+from sqlite_framework.sql.item.constraint.foreign_key.references import References
+from sqlite_framework.sql.item.constraint.table.unique import Unique
 from sqlite_framework.sql.item.expression.compound.cast import Cast
 from sqlite_framework.sql.item.expression.compound.condition import Condition, MultipleCondition
 from sqlite_framework.sql.item.expression.constants import CURRENT_UNIX_TIMESTAMP
@@ -17,19 +22,20 @@ NAME = "test"
 VERSION = 2
 
 
-ID = Column("id", INTEGER, "primary key", "not null")
+ID = Column("id", INTEGER, PRIMARY_KEY, NOT_NULL)
 TEXT_COLUMN = Column("text", TEXT)
-OTHER_ID = Column("other_id", INTEGER, "not null")
-TIMESTAMP = Column("timestamp", TEXT)
-
 
 TEST = Table("test")
 TEST.column(ID)
 TEST.column(TEXT_COLUMN)
+TEST.constraint(Unique(TEXT_COLUMN))
+
+
+OTHER_ID = Column("other_id", INTEGER, NOT_NULL, References(TEST, on_delete=CASCADE))
+TIMESTAMP = Column("timestamp", INTEGER, Default(CURRENT_UNIX_TIMESTAMP))
 
 TEST2 = Table("test2")
 TEST2.column(OTHER_ID)
-TEST2.column(TEXT_COLUMN)
 TEST2.column(TIMESTAMP, version=2)
 
 
@@ -41,10 +47,10 @@ ADD_TEST = Insert().or_(REPLACE)\
 
 ADD_TEST2_FROM_TEST = Insert()\
     .table(TEST2)\
-    .columns(OTHER_ID, TEXT_COLUMN, TIMESTAMP)\
+    .columns(OTHER_ID)\
     .select(
         Select()
-        .fields(ID, TEXT_COLUMN, CURRENT_UNIX_TIMESTAMP)
+        .fields(ID)
         .table(TEST)
         .where(Condition(ID, EQUAL, ":id"))
     )\
@@ -70,7 +76,7 @@ GET_ALL_TEST_SORTED_BY_TEXT = Select()\
 
 GET_ALL_TEST2_SORTED_BY_TIMESTAMP = Select()\
     .fields(OTHER_ID, TEXT_COLUMN, TIMESTAMP)\
-    .table(TEST2)\
+    .table(TEST2).join(TEST, on=Condition(ID, EQUAL, OTHER_ID))\
     .order_by(Cast(TIMESTAMP, INTEGER), DESC)\
     .build()
 
