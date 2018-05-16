@@ -50,7 +50,7 @@ class Select(WhereClause, OrderByClause, StatementBuilder):
                 "add a 'cartesian=True' parameter to the join call."
             )
         if self._not_none(self._join):
-            self._join = self._join + " " + join
+            self._join += " " + join
         else:
             self._join = join
         return self
