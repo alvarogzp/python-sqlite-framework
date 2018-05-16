@@ -9,6 +9,7 @@ from sqlite_framework.sql.item.expression.compound.condition import Condition, M
 from sqlite_framework.sql.item.expression.constants import CURRENT_UNIX_TIMESTAMP
 from sqlite_framework.sql.item.table import Table
 from sqlite_framework.sql.result.row import ResultRow
+from sqlite_framework.sql.statement.builder.delete import Delete
 from sqlite_framework.sql.statement.builder.insert import Insert
 from sqlite_framework.sql.statement.builder.select import Select
 
@@ -50,6 +51,11 @@ ADD_TEST2_FROM_TEST = Insert()\
     )\
     .build()
 
+DELETE_TEST = Delete()\
+    .table(TEST)\
+    .where(Condition(ID, EQUAL, ":id"))\
+    .build()
+
 GET_TEST_BY_ID_AND_TEXT = Select()\
     .fields(ID, TEXT_COLUMN)\
     .table(TEST)\
@@ -86,6 +92,9 @@ class TestSqliteComponent(SqliteStorageComponent):
     def save_test2(self, test_id: int):
         # if user does not exists in test table, nothing will be inserted into test2
         self.statement(ADD_TEST2_FROM_TEST).execute(id=test_id)
+
+    def delete_test(self, test_id: int):
+        self.statement(DELETE_TEST).execute(id=test_id)
 
     def get_test(self, test_id: int, text: str):
         value = self.statement(GET_TEST_BY_ID_AND_TEXT).execute(id=test_id, text=text).first()
