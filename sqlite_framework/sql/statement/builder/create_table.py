@@ -1,3 +1,5 @@
+import itertools
+
 from sqlite_framework.sql.item.table import Table
 from sqlite_framework.sql.statement.builder.base import StatementBuilder
 from sqlite_framework.sql.statement.builder.clauses.columns import ColumnsClause
@@ -22,5 +24,7 @@ class CreateTable(TableClause, ColumnsClause, ConstraintsClause, StatementBuilde
         return self
 
     def build_sql(self):
-        columns = ", ".join(self._columns_definitions)
-        return "create table {name} ({columns})".format(name=self._table, columns=columns)
+        columns_and_constraints = itertools.chain(self._columns_definitions, self._constraints)
+        columns_and_constraints = ", ".join(columns_and_constraints)
+        return "create table {name} ({columns_and_constraints})"\
+            .format(name=self._table, columns_and_constraints=columns_and_constraints)
