@@ -14,8 +14,13 @@ EXPRESSION_TYPE = Union[EXPRESSION_TYPE_SIMPLE, EXPRESSION_TYPE_LIST]
 class ExpressionParser:
     @classmethod
     def parse(cls, expr: EXPRESSION_TYPE):
+        # importing Select here to avoid cyclic dependency Select -> ExpressionParser -/> Select
+        from sqlite_framework.sql.statement.builder.select import Select
+        from sqlite_framework.sql.item.expression.select import SelectExpression
         if isinstance(expr, Expression):
             return expr
+        elif isinstance(expr, Select):
+            return SelectExpression(expr)
         elif isinstance(expr, Column):
             return ColumnName(expr)
         elif isinstance(expr, (str, int)):
