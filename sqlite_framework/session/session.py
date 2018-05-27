@@ -17,6 +17,9 @@ class SqliteSession:
         self._init_connection()
 
     def _init_connection(self):
+        if self.connection is not None:
+            # already initialized, ignoring
+            return
         self.connection = sqlite3.connect(self.database_filename)
         if self.debug:
             # print all sentences to stdout

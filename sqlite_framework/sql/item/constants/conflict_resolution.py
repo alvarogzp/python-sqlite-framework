@@ -6,3 +6,4 @@ class ConflictResolution(NamedItem):
 
 
 REPLACE = ConflictResolution("replace")
+IGNORE = ConflictResolution("ignore")
