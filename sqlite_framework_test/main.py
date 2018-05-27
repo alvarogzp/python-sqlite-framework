@@ -26,3 +26,9 @@ print(test_component.get_test(1, "test 1"))
 print(test_component.get_test(2, "test 4"))
 print(test_component.get_all_test())
 print(test_component.get_all_test2())
+
+with session:
+    test_component.delete_test(55)
+
+print(test_component.get_all_test())
+print(test_component.get_all_test2())
