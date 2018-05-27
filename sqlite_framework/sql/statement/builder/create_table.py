@@ -1,10 +1,13 @@
+import itertools
+
 from sqlite_framework.sql.item.table import Table
 from sqlite_framework.sql.statement.builder.base import StatementBuilder
 from sqlite_framework.sql.statement.builder.clauses.columns import ColumnsClause
+from sqlite_framework.sql.statement.builder.clauses.constraints import ConstraintsClause
 from sqlite_framework.sql.statement.builder.clauses.table import TableClause
 
 
-class CreateTable(TableClause, ColumnsClause, StatementBuilder):
+class CreateTable(TableClause, ColumnsClause, ConstraintsClause, StatementBuilder):
     """
     IMPORTANT:
     Table name and column definitions are added to the sql statement in an unsafe way!
@@ -17,8 +20,11 @@ class CreateTable(TableClause, ColumnsClause, StatementBuilder):
     def from_definition(self, table: Table):
         self.table(table)
         self.columns(*table.columns.get_all())
+        self.constraints(*table.constraints)
         return self
 
     def build_sql(self):
-        columns = ", ".join(self._columns_definitions)
-        return "create table {name} ({columns})".format(name=self._table, columns=columns)
+        columns_and_constraints = itertools.chain(self._columns_definitions, self._constraints)
+        columns_and_constraints = ", ".join(columns_and_constraints)
+        return "create table {name} ({columns_and_constraints})"\
+            .format(name=self._table, columns_and_constraints=columns_and_constraints)

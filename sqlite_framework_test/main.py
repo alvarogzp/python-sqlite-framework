@@ -5,7 +5,7 @@ from sqlite_framework.session.session import SqliteSession
 from sqlite_framework_test.factory import TestSqliteStorageComponentFactory
 
 
-session = SqliteSession(":memory:", debug=True)
+session = SqliteSession(":memory:", debug=True, enable_foreign_keys=True)
 
 with session:
     session.init()
