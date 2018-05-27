@@ -10,6 +10,7 @@ class Operator(NamedItem):
 
 EQUAL = Operator("=")
 IS = Operator("is")
+IN = Operator("in")
 
 AND = Operator("and")
 

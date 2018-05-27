@@ -8,6 +8,7 @@ from sqlite_framework.sql.item.constraint.column.simple import PRIMARY_KEY, NOT_
 
 class Column(SqlItem):
     def __init__(self, name: str, type: Type, *constraints: Union[COLUMN_CONSTRAINT_TYPE, str]):
+        super().__init__()
         self.name = name
         self.type = type
         self.constraints = tuple(map(self._convert_legacy_constraints, constraints)) if constraints else ()
