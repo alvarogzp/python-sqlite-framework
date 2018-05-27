@@ -2,13 +2,18 @@ from collections import defaultdict
 
 from sqlite_framework.sql.item.base import NamedItem
 from sqlite_framework.sql.item.column import Column
+from sqlite_framework.sql.item.constraint.table.table import TABLE_CONSTRAINT_TYPE
 
 
 class Table(NamedItem):
     def __init__(self, name: str):
         super().__init__(name)
         self.columns = ColumnList()
+        self.constraints = []
         self.column = self.columns.add
+
+    def constraint(self, *constraints: TABLE_CONSTRAINT_TYPE):
+        self.constraints.extend(constraints)
 
 
 class ColumnList:
