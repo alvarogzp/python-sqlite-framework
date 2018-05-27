@@ -5,9 +5,10 @@ from sqlite_framework.sql.result.row import ResultRow
 
 
 class SqliteSession:
-    def __init__(self, database_filename: str, debug: bool):
+    def __init__(self, database_filename: str, debug: bool, enable_foreign_keys: bool = False):
         self.database_filename = database_filename
         self.debug = debug
+        self.enable_foreign_keys = enable_foreign_keys
         self.inside_pending_context_manager = False
         # initialized in init to avoid creating sqlite objects outside the thread in which it will be operating
         self.connection = None  # type: Connection
@@ -24,6 +25,9 @@ class SqliteSession:
         self.connection.isolation_level = None
         # improved rows
         self.connection.row_factory = ResultRow
+        # enable foreign keys before entering a transaction
+        if self.enable_foreign_keys:
+            self.connection.execute("PRAGMA foreign_keys = ON")
         if self.inside_pending_context_manager:
             self.__enter__()
 
