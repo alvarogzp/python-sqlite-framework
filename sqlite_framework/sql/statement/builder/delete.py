@@ -19,7 +19,7 @@ class Delete(TableClause, WhereClause, StatementBuilder):
         elif not self._delete_all_rows:
             raise Exception("Trying to build a DELETE statement without a WHERE clause!!\n"
                             "They are not allowed by default to avoid common mistakes, "
-                            "as the entire table content will be deleted.\n"
+                            "as the entire table content would be deleted.\n"
                             "If you know what you are doing and want to go along with it, "
                             "you can force it by calling delete_all_rows().")
         return sql

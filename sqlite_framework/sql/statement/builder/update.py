@@ -9,6 +9,11 @@ class Update(TableClause, WhereClause, StatementBuilder):
     def __init__(self):
         super().__init__()
         self._set = None
+        self._update_all_rows = False
+
+    def update_all_rows(self, update_all: bool = True):
+        self._update_all_rows = update_all
+        return self
 
     def set(self, column: Column, expr: EXPRESSION_TYPE):
         expr = ExpressionParser.parse(expr)
@@ -19,4 +24,10 @@ class Update(TableClause, WhereClause, StatementBuilder):
         sql = "update {table} {set}".format(table=self._table, set=self._set)
         if self._not_none(self._where):
             sql += " {where}".format(where=self._where)
+        elif not self._update_all_rows:
+            raise Exception("Trying to build an UPDATE statement without a WHERE clause!\n"
+                            "They are not allowed by default to avoid common mistakes, "
+                            "as every table row would be updated.\n"
+                            "If you know what you are doing and want to go along with it, "
+                            "you can force it by calling update_all_rows().")
         return sql
