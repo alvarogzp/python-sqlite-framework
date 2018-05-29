@@ -5,6 +5,7 @@ from sqlite_framework.sql.item.column import Column
 from sqlite_framework.sql.item.constants.conflict_resolution import REPLACE
 from sqlite_framework.sql.item.constants.operator import EQUAL
 from sqlite_framework.sql.item.constants.type import TEXT, INTEGER
+from sqlite_framework.sql.item.constraint.column.simple import PRIMARY_KEY, NOT_NULL
 from sqlite_framework.sql.item.expression.compound.condition import Condition
 from sqlite_framework.sql.item.table import Table
 from sqlite_framework.sql.statement.builder.insert import Insert
@@ -15,7 +16,7 @@ NAME = "version_info"
 VERSION = 1
 
 
-COMPONENT = Column("component", TEXT, "primary key", "not null")
+COMPONENT = Column("component", TEXT, PRIMARY_KEY, NOT_NULL)
 COMPONENT_VERSION = Column("version", INTEGER)
 
 
@@ -68,4 +69,4 @@ class VersionInfoSqliteComponent(SqliteStorageComponent):
                 # if the error is for another reason, let it propagate
                 raise e
         if row is not None:
-            return row["version"]
+            return row[COMPONENT_VERSION]

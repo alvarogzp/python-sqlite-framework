@@ -9,6 +9,7 @@ DEFAULT_AFTER = ""
 class ParsedExpressionList(Expression):
     def __init__(self, *expressions: Expression, separator: str = DEFAULT_SEPARATOR,
                  before: str = DEFAULT_BEFORE, after: str = DEFAULT_AFTER):
+        super().__init__()
         self.expressions = expressions
         self.separator = separator
         self.before = before
